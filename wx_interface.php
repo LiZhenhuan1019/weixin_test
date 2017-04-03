@@ -74,14 +74,15 @@ class wechatCallbackapiTest
     private function text_message($xml_element)
     {
         $text = $xml_element->Content;
-        if($text == 'hello' || $text == "Hello")
+		if($text == 'hello' || $text == "Hello" ||
+		   $text == '你好')
         {
             $openid = $xml_element->FromUserName;
             $user_info = get_user_informantion($openid);
             if($user_info['subscribe'] == 1)
             {
                 $user_name = $user_info['nickname'];
-                echo $this->return_text_message($xml_element,"Hello, $user_name!");
+                echo $this->return_text_message($xml_element,"你好, $user_name!");
             }
         }
     }

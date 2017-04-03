@@ -22,10 +22,11 @@ function update_access_token()
     return $array;
 }
 
+$memcache = new Memcache();
+$memcache->connect("115.159.34.136", 11211) or die("Could not connect with memcached");
 function get_access_token()
 {
-    $memcache = new Memcache();
-    $memcache->connect("115.159.34.136", 11211) or die("Could not connect with memcached");
+    global $memcache;
     $access_token = $memcache->get('access_token');
     if ($access_token === false) {
         $result = update_access_token();
