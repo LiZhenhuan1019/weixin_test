@@ -39,4 +39,3 @@ function get_access_token()
     return $access_token;
 }
 
-print_r(get_access_token());

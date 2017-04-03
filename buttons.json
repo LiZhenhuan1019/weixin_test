@@ -1,0 +1,16 @@
+{
+  "button":
+  [
+    {
+      "name": "网页",
+      "sub_button":
+      [
+        {
+          "type": "view",
+          "name": "自定义分享",
+          "url": "http://115.159.34.136/user_defined_page.php"
+        }
+      ]
+    }
+  ]
+}
