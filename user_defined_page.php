@@ -42,7 +42,7 @@
                     link: url,
                     imgUrl: 'https://learnopengl.com/img/textures/container.jpg',
                     trigger: function (res) {
-                        alert('用户点击发送给朋友');
+                        alert('发送给朋友');
                     },
                     success: function (res) {
                         alert('已分享');
