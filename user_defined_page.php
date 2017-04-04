@@ -1,53 +1,63 @@
 <html>
 <head>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <?php
+    require_once 'get_jsapi_ticket.php';
+    $array = get_config_info();
+    echo '<script>timestamp = "' . $array[0] . '";noncestr = "' . $array[1] . '";signature = "' . $array[2] . '";url = "' . $array[3] . '";</script>';
+
+    ?>
     <script>
         appId = "wx343420ed7095b24b";
-        timestamp = new Date().getTime();
         wx.config({
             debug: false,
-            appId: '${appId}',
-            timestamp: '${timestamp}',
-            nonceStr: '${shakeMap.nonceStr}',
-            signature: '${shakeMap.signature}',
+            appId: appId,
+            timestamp: timestamp,
+            nonceStr: noncestr,
+            signature: signature,
             jsApiList: [
                 'checkJsApi',
                 'onMenuShareTimeline',
                 'onMenuShareAppMessage'
             ]
         });
-        wx.ready(function () {
-            var shareData = {
-                title: '${title}',
-                desc: '${description}',
-                link: '${url}',
-                imgUrl: '${headImgUrl}',
-                success: function (res) {
-                    //alert('已分享');
-                },
-                cancel: function (res) {
-                }
-            };
-            wx.onMenuShareAppMessage({
-                title: '${title}',
-                desc: '${description}',
-                link: '${url}',
-                imgUrl: '${headImgUrl}',
-                trigger: function (res) {
-                    //  alert('用户点击发送给朋友');
-                },
-                success: function (res) {
-                    //alert('已分享');
-                },
-                cancel: function (res) {
-                    //alert('已取消');
-                },
-                fail: function (res) {
-                    alert(JSON.stringify(res));
-                }
+        title = 'user-defined title';
+        description = 'user-defined descrition';
+            wx.ready(function () {
+                var shareData = {
+                    title: title,
+                    desc: description,
+                    link: url,
+                    imgUrl: 'https://learnopengl.com/img/textures/container.jpg',
+                    success: function () {
+                        alert('已分享');
+                    },
+                    cancel: function () {
+                        alert('已取消');
+                    }
+                };
+                wx.onMenuShareAppMessage({
+                    title: title,
+                    desc: description,
+                    link: url,
+                    imgUrl: 'https://learnopengl.com/img/textures/container.jpg',
+                    trigger: function (res) {
+                        alert('用户点击发送给朋友');
+                    },
+                    success: function (res) {
+                        alert('已分享');
+                    },
+                    cancel: function (res) {
+                        alert('已取消');
+                    },
+                    fail: function (res) {
+                        alert(JSON.stringify(res));
+                    }
+                });
+                wx.onMenuShareTimeline(shareData);
+                wx.onMenuShareQQ(shareData);
+                wx.onMenuShareQZone(shareData);
             });
-            wx.onMenuShareTimeline(shareData);
-        });
         wx.error(function (res) {
             alert("error: " + res.errMsg);
         });

@@ -24,4 +24,19 @@ function create_menu()
     curl_setopt($ch,CURLOPT_POSTFIELDS,$menu);
     curl_exec($ch);
 }
+function delete_menu()
+{
+    $access_token = get_access_token();
+    $url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=$access_token";
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_exec($ch);
+}
+function update_menu()
+{
+    delete_menu();
+    create_menu();
+}
+
 create_menu();

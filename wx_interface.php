@@ -101,6 +101,10 @@ class wechatCallbackapiTest
     {
         echo $this->return_text_message($xml_element,"Welcome to follow this Official Account!");
     }
+    private function VIEW_event($xml_element)
+    {
+
+    }
 
     private function return_text_message($xml_element,$text)
     {
